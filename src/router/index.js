@@ -1,10 +1,10 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import NotFound from '@/components/NotFound';
-import TasksIndex from '@/components/Tasks/Index';
 import TaskView from '@/components/Tasks/View';
 import TaskCreate from '@/components/Tasks/Create';
 import TaskEdit from '@/components/Tasks/Edit';
+import App from '@/App';
 
 Vue.use(Router);
 
@@ -13,6 +13,11 @@ export default new Router({
   routes: [
     {
       path: '',
+    },
+    {
+      path: '/',
+      name: 'home',
+      component:App
     },
     {
       path: '/404',
@@ -25,13 +30,13 @@ export default new Router({
     },
     {
       path: '/tasks',
-      component: TasksIndex,
+      component: App,
       props: (route) => ({ query: route.query.q }),
       children: [
         {
           path: '/',
           name: 'Tasks',
-          component: TasksIndex,
+          component: App,
         },
         {
           path: ':id/view',
@@ -44,7 +49,7 @@ export default new Router({
           component: TaskEdit,
         },
         {
-          path: '/create',
+          path: 'create',
           name: 'TaskCreate',
           component: TaskCreate,
         },
